@@ -1,0 +1,32 @@
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(var(--ring-unit) * 37.5);
+  gap: calc(var(--ring-unit) * 4);
+  align-items: start;
+  max-width: var(--pulse-width-feed);
+  margin: 0 auto;
+  padding: calc(var(--ring-unit) * 3.25) calc(var(--ring-unit) * 4) calc(var(--ring-unit) * 6);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.stream {
+  min-width: 0;
+}
+
+.sentinel {
+  height: 1px;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr);
+    padding: calc(var(--ring-unit) * 2.5) calc(var(--ring-unit) * 2) calc(var(--ring-unit) * 5);
+  }
+}
+
+@media (max-width: 600px) {
+  .layout {
+    padding: calc(var(--ring-unit) * 1.5) calc(var(--ring-unit) * 1.5) calc(var(--ring-unit) * 4);
+  }
+}

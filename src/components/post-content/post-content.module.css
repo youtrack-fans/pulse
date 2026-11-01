@@ -1,0 +1,187 @@
+.content {
+  font-size: var(--pulse-font-l);
+  line-height: var(--pulse-line-height-relaxed);
+  color: var(--pulse-text-default);
+}
+
+.content > :last-child {
+  margin-bottom: calc(var(--ring-unit) * 3);
+}
+
+.content > p:first-child {
+  font-size: var(--pulse-font-l);
+  line-height: var(--pulse-line-height-normal);
+  color: var(--pulse-text-lead);
+  margin-bottom: calc(var(--ring-unit) * 2.5);
+}
+
+.content h1 {
+  font-size: var(--pulse-font-3xl);
+  font-weight: 700;
+  margin: calc(var(--ring-unit) * 5) 0 calc(var(--ring-unit) * 2);
+  line-height: var(--pulse-line-height-tight);
+  letter-spacing: -0.01em;
+}
+
+.content h2 {
+  font-size: var(--pulse-font-xl);
+  font-weight: 800;
+  margin: calc(var(--ring-unit) * 4) 0 calc(var(--ring-unit) * 1.5);
+  line-height: var(--pulse-line-height-snug);
+  letter-spacing: -0.3px;
+}
+
+.content h3 {
+  font-size: var(--pulse-font-l);
+  font-weight: 600;
+  margin: calc(var(--ring-unit) * 4) 0 calc(var(--ring-unit));
+  line-height: var(--pulse-line-height-snug);
+}
+
+.content h4,
+.content h5,
+.content h6 {
+  font-size: var(--pulse-font-l);
+  font-weight: 600;
+  margin: calc(var(--ring-unit) * 3) 0 calc(var(--ring-unit));
+  line-height: var(--pulse-line-height-snug);
+}
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+  scroll-margin-top: calc(var(--pulse-header-offset) + var(--ring-unit) * 4);
+}
+
+.content p {
+  margin: 0 0 calc(var(--ring-unit) * 2.5);
+}
+
+.content a {
+  color: var(--pulse-accent-strong);
+  text-decoration: none;
+}
+
+.content a:hover {
+  color: var(--pulse-accent-hover);
+}
+
+.content strong {
+  font-weight: 700;
+}
+
+.content code {
+  background: var(--pulse-bg-sidebar);
+  padding: calc(var(--ring-unit) * 0.25) calc(var(--ring-unit) * 0.75);
+  border-radius: var(--pulse-radius-xs);
+  font-size: 0.875em;
+  font-family: var(--ring-font-family-monospace);
+  color: var(--pulse-text-default);
+  border: 1px solid var(--pulse-line);
+}
+
+.content pre {
+  background: var(--pulse-bg-sidebar);
+  padding: calc(var(--ring-unit) * 2.5);
+  border-radius: var(--pulse-radius-m);
+  overflow-x: auto;
+  margin: 0 0 calc(var(--ring-unit) * 3);
+  border: 1px solid var(--pulse-line);
+}
+
+.content pre code {
+  background: none;
+  padding: 0;
+  font-size: var(--pulse-font-xs);
+  line-height: var(--pulse-line-height-relaxed);
+  border: none;
+}
+
+.content blockquote {
+  border-left: 3px solid var(--pulse-accent);
+  background: var(--pulse-callout);
+  border-radius: 0 var(--pulse-radius-m) var(--pulse-radius-m) 0;
+  margin: 0 0 calc(var(--ring-unit) * 3);
+  padding: calc(var(--ring-unit) * 1.75) calc(var(--ring-unit) * 2.25);
+  color: var(--pulse-text-body);
+  font-size: var(--pulse-font-m);
+  line-height: var(--pulse-line-height-relaxed);
+}
+
+.content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.content ul,
+.content ol {
+  margin: 0 0 calc(var(--ring-unit) * 2.5);
+  padding-left: calc(var(--ring-unit) * 3);
+}
+
+.content li {
+  margin-bottom: calc(var(--ring-unit) * 0.75);
+}
+
+.content hr {
+  border: none;
+  border-top: 1px solid var(--pulse-line);
+  margin: calc(var(--ring-unit) * 4) 0;
+}
+
+.content .figure {
+  width: fit-content;
+  max-width: 100%;
+  border-radius: var(--pulse-radius-m);
+  margin: calc(var(--ring-unit) * 1.5) 0;
+}
+
+.content .figure:has(> img:not([width])) {
+  width: 100%;
+}
+
+.content img {
+  height: auto;
+}
+
+.content img:not([data-loaded]):not([width]) {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.content ul ul,
+.content ul ol,
+.content ol ul,
+.content ol ol {
+  margin: calc(var(--ring-unit) * 0.75) 0 0;
+}
+
+.content blockquote p {
+  margin: 0 0 calc(var(--ring-unit) * 1.5);
+}
+
+.content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  margin: 0 0 calc(var(--ring-unit) * 3);
+  font-size: var(--pulse-font-m);
+  line-height: var(--pulse-line-height-normal);
+}
+
+.content th,
+.content td {
+  padding: calc(var(--ring-unit) * 1) calc(var(--ring-unit) * 1.5);
+  border: 1px solid var(--pulse-line-faint);
+  text-align: left;
+  vertical-align: top;
+}
+
+.content th {
+  background: var(--pulse-fill);
+  font-weight: 600;
+}

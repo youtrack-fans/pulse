@@ -1,0 +1,55 @@
+.avatar {
+  display: inline-block;
+  border-radius: var(--pulse-radius-round);
+  flex: none;
+  text-align: center;
+  font-family: var(--ring-font-family);
+  font-weight: 600;
+}
+
+.avatar > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  box-sizing: border-box;
+  background: var(--pulse-avatar-bg);
+  color: var(--pulse-avatar-text);
+}
+
+.size28 {
+  width: var(--pulse-avatar-xs);
+  height: var(--pulse-avatar-xs);
+  font-size: var(--pulse-avatar-font-xs);
+  line-height: var(--pulse-avatar-xs);
+}
+
+.size30 {
+  width: var(--pulse-avatar-s);
+  height: var(--pulse-avatar-s);
+  font-size: var(--pulse-avatar-font-s);
+  line-height: var(--pulse-avatar-s);
+}
+
+.size36 {
+  width: var(--pulse-avatar-m);
+  height: var(--pulse-avatar-m);
+  font-size: var(--pulse-avatar-font-m);
+  line-height: var(--pulse-avatar-m);
+}
+
+.size42 {
+  width: var(--pulse-avatar-l);
+  height: var(--pulse-avatar-l);
+  font-size: var(--pulse-avatar-font-l);
+  line-height: var(--pulse-avatar-l);
+}
+
+.size46 {
+  width: var(--pulse-avatar-xl);
+  height: var(--pulse-avatar-xl);
+  font-size: var(--pulse-avatar-font-xl);
+  line-height: var(--pulse-avatar-xl);
+}

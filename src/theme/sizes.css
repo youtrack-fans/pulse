@@ -1,0 +1,61 @@
+body {
+  --pulse-font-2xs: calc(var(--ring-unit) * 1.25);
+  --pulse-font-xs: var(--ring-font-size-smaller);
+  --pulse-font-s: var(--ring-font-size);
+  --pulse-font-m: calc(var(--ring-unit) * 1.75);
+  --pulse-font-l: calc(var(--ring-unit) * 2);
+  --pulse-font-xl: calc(var(--ring-unit) * 2.25);
+  --pulse-font-2xl: calc(var(--ring-unit) * 2.75);
+  --pulse-font-3xl: calc(var(--ring-unit) * 3.5);
+
+  --pulse-line-height-tight: 1.2;
+  --pulse-line-height-snug: 1.35;
+  --pulse-line-height-normal: 1.5;
+  --pulse-line-height-relaxed: 1.65;
+
+  --pulse-radius-xs: calc(var(--ring-unit) * 0.5);
+  --pulse-radius-s: calc(var(--ring-unit) * 0.75);
+  --pulse-radius-m: var(--ring-unit);
+  --pulse-radius-l: calc(var(--ring-unit) * 1.5);
+  --pulse-radius-xl: calc(var(--ring-unit) * 2);
+  --pulse-radius-2xl: calc(var(--ring-unit) * 2.5);
+  --pulse-radius-palette: calc(var(--ring-unit) * 2.25);
+  --pulse-radius-round: 50%;
+  --pulse-radius-pill: 999px;
+
+  --pulse-gutter-wide: calc(var(--ring-unit) * 5);
+  --pulse-header-height: calc(var(--ring-unit) * 6);
+  --pulse-header-offset: calc(var(--pulse-header-height) + 1px);
+  --pulse-header-gutter: calc(var(--ring-unit) * 4);
+  --pulse-header-gap: calc(var(--ring-unit) * 3.5);
+  --pulse-header-brand-gap: var(--ring-unit);
+  --pulse-header-action-gap: calc(var(--ring-unit) * 0.5);
+  --pulse-brand-mark: calc(var(--ring-unit) * 3);
+  --pulse-brand-layer: calc(var(--ring-unit) * 2.5);
+  --pulse-brand-layer-radius: calc(var(--ring-unit) * 0.75);
+  --pulse-brand-offset: calc(var(--ring-unit) * 0.5);
+  --pulse-tab-height: calc(var(--ring-unit) * 3.25);
+  --pulse-tab-padding: calc(var(--ring-unit) * 1.25);
+  --pulse-tab-gap: calc(var(--ring-unit) * 0.5);
+  --pulse-control-s: calc(var(--ring-unit) * 3.5);
+  --pulse-icon-s: calc(var(--ring-unit) * 2);
+
+  --pulse-badge-font: calc(var(--ring-unit) * 1.375);
+  --pulse-badge-line-height: calc(var(--ring-unit) * 2);
+  --pulse-badge-padding-x: calc(var(--ring-unit) * 0.875);
+
+  --pulse-width-feed: calc(var(--ring-unit) * 125);
+  --pulse-width-page: calc(var(--ring-unit) * 88);
+  --pulse-width-post: calc(var(--ring-unit) * 98);
+
+  --pulse-avatar-xs: 28px;
+  --pulse-avatar-s: 30px;
+  --pulse-avatar-m: 36px;
+  --pulse-avatar-l: 42px;
+  --pulse-avatar-xl: 46px;
+  --pulse-avatar-font-xs: 9px;
+  --pulse-avatar-font-s: 10px;
+  --pulse-avatar-font-m: 12px;
+  --pulse-avatar-font-l: 13px;
+  --pulse-avatar-font-xl: 15px;
+}

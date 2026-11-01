@@ -1,0 +1,6 @@
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--ring-unit) * 0.5);
+  align-items: center;
+}

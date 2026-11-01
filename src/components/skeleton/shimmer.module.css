@@ -1,0 +1,5 @@
+.shimmer {
+  display: block;
+  border-radius: var(--pulse-radius-s);
+  background: var(--pulse-skeleton);
+}

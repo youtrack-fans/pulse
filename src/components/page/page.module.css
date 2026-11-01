@@ -1,0 +1,31 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ring-unit) * 3);
+  max-width: var(--pulse-width-page);
+  margin: calc(var(--ring-unit) * 2) auto;
+  padding: 0 calc(var(--ring-unit) * 4);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.pageWide {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 var(--pulse-gutter-wide);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 900px) {
+  .pageWide {
+    padding: 0 calc(var(--ring-unit));
+  }
+}
+
+@media (max-width: 600px) {
+  .pageWide {
+    padding: 0;
+  }
+}

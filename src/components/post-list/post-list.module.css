@@ -1,0 +1,11 @@
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ring-unit) * 2);
+}
+
+@media (max-width: 600px) {
+  .posts {
+    gap: calc(var(--ring-unit) * 1.5);
+  }
+}

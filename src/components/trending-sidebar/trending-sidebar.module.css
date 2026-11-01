@@ -1,0 +1,116 @@
+.aside {
+  position: sticky;
+  top: calc(var(--pulse-header-offset) + var(--ring-unit) * 3);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ring-unit) * 2);
+}
+
+.card {
+  background: var(--pulse-bg-card);
+  border: 1px solid var(--pulse-line-card);
+  box-shadow: var(--pulse-shadow-card);
+  border-radius: var(--pulse-radius-l);
+  padding: calc(var(--ring-unit) * 2) calc(var(--ring-unit) * 2.25);
+}
+
+.title {
+  font-size: var(--pulse-font-s);
+  line-height: var(--pulse-line-height-snug);
+  min-height: 1lh;
+  font-weight: 800;
+  margin-bottom: calc(var(--ring-unit) * 1.5);
+  color: var(--pulse-text-default);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ring-unit) * 1.375);
+  font-size: var(--pulse-font-s);
+  line-height: var(--pulse-line-height-snug);
+}
+
+.item {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--ring-font-family);
+}
+
+.itemTitle {
+  display: block;
+  font-size: var(--pulse-font-s);
+  line-height: var(--pulse-line-height-snug);
+  color: var(--pulse-accent-strong);
+}
+
+.item:hover .itemTitle {
+  text-decoration: underline;
+}
+
+.sub {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ring-unit) * 0.625);
+  font-size: var(--pulse-font-xs);
+  color: var(--pulse-text-secondary);
+  margin-top: calc(var(--ring-unit) * 0.25);
+}
+
+.likeIcon {
+  display: inline-flex;
+  color: var(--pulse-accent);
+}
+
+@media (max-width: 900px) {
+  .aside {
+    display: none;
+  }
+}
+
+.skeletonTitle {
+  height: calc(var(--ring-unit) * 1.625);
+}
+
+.skeletonLine {
+  height: calc(var(--ring-unit) * 1.375);
+  margin-bottom: calc(var(--ring-unit) * 0.625);
+}
+
+.skeletonSub {
+  height: calc(var(--ring-unit) * 1.125);
+  margin-top: calc(var(--ring-unit) * 0.875);
+}
+
+.skeletonRowTall {
+  min-height: calc(var(--ring-unit) * 6.725);
+}
+
+.skeletonRowShort {
+  min-height: calc(var(--ring-unit) * 4.375);
+}
+
+.w40 {
+  width: 40%;
+}
+
+.w45 {
+  width: 45%;
+}
+
+.w62 {
+  width: 62%;
+}
+
+.w70 {
+  width: 70%;
+}
+
+.w100 {
+  width: 100%;
+}

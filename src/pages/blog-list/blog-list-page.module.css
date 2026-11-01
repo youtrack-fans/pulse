@@ -1,0 +1,26 @@
+.authorFilter {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ring-unit));
+  font-size: var(--pulse-font-s);
+  color: var(--pulse-text-secondary);
+  margin-top: calc(var(--ring-unit) * 2);
+}
+
+.emptyPosts {
+  text-align: center;
+  padding: calc(var(--ring-unit) * 10) 0;
+  color: var(--pulse-text-secondary);
+  font-size: var(--pulse-font-s);
+}
+
+.empty {
+  text-align: center;
+  padding: calc(var(--ring-unit) * 10) 0;
+}
+
+.emptyText {
+  display: block;
+  margin-top: calc(var(--ring-unit) * 2);
+  color: var(--pulse-text-secondary);
+}

@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "Blog Settings",
+  "description": "Configure the blog platform settings",
+  "properties": {
+    "project": {
+      "title": "Blog Project",
+      "description": "Select the project whose articles will be used as blog content. Root-level articles become blogs, their children become posts.",
+      "type": "object",
+      "x-entity": "Project",
+      "x-scope": "GLOBAL"
+    },
+    "blogName": {
+      "title": "Blog Name",
+      "description": "Name shown in the header instead of the default 'Pulse', for example 'JetBrains Blog'.",
+      "type": "string",
+      "x-scope": "GLOBAL"
+    }
+  },
+  "required": []
+}

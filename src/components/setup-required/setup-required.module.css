@@ -1,0 +1,5 @@
+.description {
+  display: block;
+  color: var(--pulse-text-secondary);
+  max-width: 480px;
+}

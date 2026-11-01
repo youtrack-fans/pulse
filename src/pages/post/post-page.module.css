@@ -1,0 +1,100 @@
+.layout {
+  max-width: var(--pulse-width-post);
+  margin: 0 auto;
+  padding: calc(var(--ring-unit) * 3) calc(var(--ring-unit) * 4) calc(var(--ring-unit) * 6);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.mainColumn {
+  min-width: 0;
+}
+
+.hero {
+  background: var(--pulse-bg-card);
+  border: 1px solid var(--pulse-line-card);
+  box-shadow: var(--pulse-shadow-card);
+  border-radius: var(--pulse-radius-xl);
+  padding: calc(var(--ring-unit) * 4) calc(var(--ring-unit) * 5) calc(var(--ring-unit) * 3);
+}
+
+.heroHead {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ring-unit) * 1.5);
+  margin-bottom: calc(var(--ring-unit) * 2.5);
+}
+
+.who {
+  min-width: 0;
+}
+
+.authorLink {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: var(--pulse-font-s);
+  color: var(--pulse-text-default);
+}
+
+.authorStatic,
+.authorStatic:hover {
+  cursor: default;
+  text-decoration: none;
+}
+
+.authorLink:hover {
+  text-decoration: underline;
+}
+
+.sub {
+  font-size: var(--pulse-font-s);
+  color: var(--pulse-text-muted);
+  margin-top: calc(var(--ring-unit) * 0.625);
+}
+
+.title {
+  margin: 0 0 calc(var(--ring-unit) * 1.75);
+  font-size: var(--pulse-font-3xl);
+  font-weight: 800;
+  line-height: var(--pulse-line-height-tight);
+  color: var(--pulse-text-default);
+  letter-spacing: -0.7px;
+  scroll-margin-top: calc(var(--pulse-header-offset) + var(--ring-unit) * 4);
+}
+
+.tags {
+  margin-bottom: calc(var(--ring-unit) * 2);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--ring-unit);
+  margin-top: calc(var(--ring-unit) * 3);
+}
+
+@media (max-width: 600px) {
+  .layout {
+    padding: calc(var(--ring-unit) * 2) calc(var(--ring-unit) * 1.75) calc(var(--ring-unit) * 4);
+  }
+
+  .hero {
+    padding: calc(var(--ring-unit) * 2.5) calc(var(--ring-unit) * 2.25) calc(var(--ring-unit) * 2);
+  }
+
+  .title {
+    font-size: var(--pulse-font-2xl);
+    letter-spacing: -0.5px;
+  }
+}
+
+.commentsError {
+  padding: calc(var(--ring-unit) * 2) 0;
+  font-size: var(--pulse-font-m);
+  color: var(--pulse-text-muted);
+}

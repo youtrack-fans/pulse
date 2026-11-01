@@ -1,0 +1,31 @@
+{
+  "name": "pulse",
+  "title": "Pulse",
+  "description": "A corporate blog platform for YouTrack: write, read, and discuss articles in one place.",
+  "$schema": "https://json.schemastore.org/youtrack-app.json",
+  "version": "1.0.0",
+  "url": "https://youtrack.fans/pulse",
+  "minYouTrackVersion": "2026.3.0",
+  "changeNotes": "Initial release.",
+  "vendor": {
+    "name": "YouTrack Fans",
+    "url": "https://youtrack.fans/pulse",
+    "email": "support@youtrack.fans"
+  },
+  "icon": "icons/blog-icon-nav.svg",
+  "widgets": [
+    {
+      "key": "feed",
+      "name": "Pulse",
+      "indexPath": "feed/index.html",
+      "extensionPoint": "MAIN_MENU_ITEM",
+      "iconPath": "feed/widget-icon-nav.svg",
+      "description": "Corporate blog powered by YouTrack Articles",
+      "showHeader": false,
+      "loaderMode": "none",
+      "permissions": [
+        "READ_ARTICLE"
+      ]
+    }
+  ]
+}

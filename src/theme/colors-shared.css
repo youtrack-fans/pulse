@@ -1,0 +1,12 @@
+body {
+  --pulse-text-disabled: var(--ring-disabled-color);
+  --pulse-bg-sidebar: var(--ring-sidebar-background-color);
+  --pulse-border: var(--ring-borders-color);
+  --pulse-focus: var(--ring-main-color);
+  --pulse-focus-rgb: var(--ring-main-color-rgb, 53, 122, 232);
+  --pulse-focus-ring: rgba(var(--pulse-focus-rgb), 0.15);
+  --pulse-link-hover: var(--ring-link-hover-color);
+
+  --pulse-logo-pink: #ff4fa8;
+  --pulse-logo-orange: #ff8a3d;
+}

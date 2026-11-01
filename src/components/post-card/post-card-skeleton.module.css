@@ -1,0 +1,89 @@
+.avatar42 {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--pulse-radius-round);
+}
+
+.name {
+  width: calc(var(--ring-unit) * 19);
+  height: calc(var(--ring-unit) * 1.75);
+}
+
+.tag {
+  flex: none;
+  width: calc(var(--ring-unit) * 6.5);
+  height: calc(var(--ring-unit) * 1.75);
+  border-radius: var(--pulse-radius-m);
+}
+
+.meta {
+  width: calc(var(--ring-unit) * 14);
+  height: calc(var(--ring-unit) * 1.375);
+  margin-top: calc(var(--ring-unit) * 0.75);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  height: calc(var(--pulse-font-2xl) * var(--pulse-line-height-snug));
+}
+
+.titleBar {
+  width: 78%;
+  height: calc(var(--ring-unit) * 2.25);
+}
+
+.excerpt {
+  margin: calc(var(--ring-unit) * 1.125) 0 calc(var(--ring-unit) * 1.75);
+}
+
+.excerptWithMedia {
+  margin-bottom: 0;
+}
+
+.textRow {
+  display: flex;
+  align-items: center;
+  height: calc(var(--pulse-font-m) * var(--pulse-line-height-relaxed));
+}
+
+.textBar {
+  height: calc(var(--ring-unit) * 1.375);
+}
+
+.textFull {
+  width: 100%;
+}
+
+.textLong {
+  width: 94%;
+}
+
+.textShort {
+  width: 58%;
+}
+
+div.media {
+  aspect-ratio: 16 / 9;
+  border-radius: 0;
+  background: var(--pulse-skeleton);
+}
+
+.pill {
+  width: calc(var(--ring-unit) * 5);
+  height: calc(var(--ring-unit) * 4);
+  border-radius: var(--pulse-radius-xl);
+}
+
+.pillEnd {
+  margin-left: auto;
+  width: calc(var(--ring-unit) * 4);
+}
+
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ring-unit) * 2);
+}

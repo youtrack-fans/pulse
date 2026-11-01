@@ -1,0 +1,234 @@
+.card {
+  position: relative;
+  display: block;
+  padding: 0;
+  box-shadow: var(--pulse-shadow-card);
+  border-radius: var(--pulse-radius-l);
+  cursor: pointer;
+  background: var(--pulse-bg-card);
+  overflow: hidden;
+}
+
+.card:has(.titleButton:focus-visible) {
+  outline: 2px solid var(--pulse-focus);
+  outline-offset: -2px;
+}
+
+.content {
+  padding: calc(var(--ring-unit) * 2.5) calc(var(--ring-unit) * 2.5) calc(var(--ring-unit) * 2);
+}
+
+.contentWithMedia {
+  padding-bottom: calc(var(--ring-unit) * 2);
+}
+
+.titleButton {
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+}
+
+.titleButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.titleButton:focus-visible {
+  outline: none;
+}
+
+.authorName,
+.replyBtn {
+  position: relative;
+  z-index: 1;
+}
+
+.contentWithMedia .excerpt {
+  margin-bottom: 0;
+}
+
+.bottomContent {
+  padding: 0 calc(var(--ring-unit) * 2.5) calc(var(--ring-unit) * 2);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ring-unit) * 1.625);
+  margin-bottom: calc(var(--ring-unit) * 2);
+}
+
+.who {
+  min-width: 0;
+  flex: 1;
+}
+
+.authorLine {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--ring-unit) * 1.125);
+}
+
+.authorName {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: var(--pulse-font-m);
+  color: var(--pulse-text-default);
+  white-space: nowrap;
+}
+
+.authorName:hover {
+  text-decoration: underline;
+}
+
+.authorStatic,
+.authorStatic:hover {
+  cursor: default;
+  text-decoration: none;
+}
+
+.sub {
+  font-size: var(--pulse-font-xs);
+  color: var(--pulse-text-muted);
+  margin-top: calc(var(--ring-unit) * 0.5);
+}
+
+.title {
+  display: block;
+  margin: 0;
+  font-size: var(--pulse-font-2xl);
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  line-height: var(--pulse-line-height-snug);
+  color: var(--pulse-text-default);
+}
+
+.excerpt {
+  margin: calc(var(--ring-unit) * 1.125) 0 calc(var(--ring-unit) * 1.75);
+  font-size: var(--pulse-font-m);
+  color: var(--pulse-text-body);
+  line-height: var(--pulse-line-height-relaxed);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.media img {
+  width: 100%;
+  height: auto;
+}
+
+.media img:not([width]):not([data-loaded]) {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.media + .bottomContent {
+  padding-top: calc(var(--ring-unit) * 2);
+}
+
+.actionsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ring-unit);
+}
+
+.inlineComment {
+  display: flex;
+  gap: calc(var(--ring-unit) * 1.5);
+  padding-top: calc(var(--ring-unit) * 1.75);
+}
+
+.inlineBody {
+  min-width: 0;
+  flex: 1;
+}
+
+.inlineText {
+  font-size: var(--pulse-font-s);
+  line-height: var(--pulse-line-height-normal);
+  color: var(--pulse-text-body);
+}
+
+.inlineName {
+  font-weight: 700;
+  color: var(--pulse-text-default);
+  margin-right: calc(var(--ring-unit) * 0.75);
+}
+
+.inlineMeta {
+  font-size: var(--pulse-font-xs);
+  color: var(--pulse-text-muted);
+  margin-top: calc(var(--ring-unit) * 0.75);
+  display: flex;
+  gap: calc(var(--ring-unit) * 2);
+  align-items: center;
+}
+
+.like {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(var(--ring-unit) * 0.625);
+}
+
+.like svg {
+  color: var(--pulse-text-disabled);
+}
+
+.replyBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: var(--ring-font-family);
+  font-size: inherit;
+  color: inherit;
+}
+
+.replyBtn:hover {
+  color: var(--pulse-accent-strong);
+}
+
+.repliesLink {
+  color: var(--pulse-accent-strong);
+  font-weight: 600;
+}
+
+@media (max-width: 600px) {
+  .content {
+    padding: calc(var(--ring-unit) * 2) calc(var(--ring-unit) * 2) calc(var(--ring-unit));
+  }
+
+  .contentWithMedia {
+    padding-bottom: calc(var(--ring-unit) * 1.5);
+  }
+
+  .bottomContent {
+    padding: 0 calc(var(--ring-unit) * 2) calc(var(--ring-unit));
+  }
+
+  .title {
+    font-size: var(--pulse-font-xl);
+  }
+
+  .excerpt {
+    font-size: var(--pulse-font-m);
+  }
+
+  .inlineComment {
+    display: none;
+  }
+}
+

@@ -1,0 +1,11 @@
+.badge {
+  display: inline-block;
+  padding: 0 var(--pulse-badge-padding-x);
+  border-radius: var(--pulse-radius-m);
+  background: var(--pulse-accent-soft);
+  color: var(--pulse-accent-on-soft);
+  font-size: var(--pulse-badge-font);
+  font-weight: 500;
+  line-height: var(--pulse-badge-line-height);
+  white-space: nowrap;
+}

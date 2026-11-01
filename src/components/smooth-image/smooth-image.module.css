@@ -1,0 +1,47 @@
+.frame {
+  display: block;
+  overflow: hidden;
+  background: var(--pulse-skeleton);
+}
+
+.frame:has(> .image[data-loaded='instant']) {
+  background: transparent;
+}
+
+.frame:has(> .image[data-loaded='fade']) {
+  background: transparent;
+  transition: background-color 0s linear 0.18s;
+}
+
+.image {
+  display: block;
+  max-width: 100%;
+}
+
+.image:not([data-loaded]) {
+  opacity: 0;
+}
+
+.image[data-loaded='fade'] {
+  animation: imageFadeIn 0.18s ease-out;
+}
+
+@keyframes imageFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .image[data-loaded='fade'] {
+    animation: none;
+  }
+
+  .frame:has(> .image[data-loaded='fade']) {
+    transition: none;
+  }
+}

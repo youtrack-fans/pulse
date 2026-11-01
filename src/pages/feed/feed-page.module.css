@@ -1,0 +1,13 @@
+.empty {
+  text-align: center;
+  padding: calc(var(--ring-unit) * 6) 0;
+  color: var(--pulse-text-secondary);
+  font-size: var(--pulse-font-s);
+}
+
+.loadingMore {
+  text-align: center;
+  padding: calc(var(--ring-unit) * 3) 0;
+  color: var(--pulse-text-secondary);
+  font-size: var(--pulse-font-s);
+}
