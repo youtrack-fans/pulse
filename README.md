@@ -1,6 +1,6 @@
 # Pulse
 
-A blog inside YouTrack. Pulse turns the articles of one YouTrack project into a blog: root articles are blogs, their child articles are posts, and article comments are the discussion under each post.
+Blog platform app for YouTrack. Pulse turns the articles of one YouTrack project into a blog: root articles are blogs, their child articles are posts, and article comments are the discussion under each post.
 
 - Documentation: https://youtrack.fans/pulse/
 - Issues and feedback: https://github.com/youtrack-fans/pulse/issues

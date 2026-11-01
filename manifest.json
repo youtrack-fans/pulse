@@ -1,7 +1,7 @@
 {
   "name": "pulse",
   "title": "Pulse",
-  "description": "A corporate blog platform for YouTrack: write, read, and discuss articles in one place.",
+  "description": "Blog platform app for YouTrack",
   "$schema": "https://json.schemastore.org/youtrack-app.json",
   "version": "1.0.0",
   "url": "https://youtrack.fans/pulse",
@@ -20,7 +20,7 @@
       "indexPath": "feed/index.html",
       "extensionPoint": "MAIN_MENU_ITEM",
       "iconPath": "feed/widget-icon-nav.svg",
-      "description": "Corporate blog powered by YouTrack Articles",
+      "description": "Blog platform app for YouTrack",
       "showHeader": false,
       "loaderMode": "none",
       "permissions": [
