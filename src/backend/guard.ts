@@ -24,6 +24,8 @@ export interface BlogRequest {
   project: Project;
 }
 
+const GUEST_LOGIN = 'guest';
+
 export function guardBlogRequest(ctx: GuardContext): BlogRequest | null {
   const me = ctx.currentUser.login;
   const project = ctx.settings.project as unknown as Project | undefined;
@@ -38,4 +40,13 @@ export function guardBlogRequest(ctx: GuardContext): BlogRequest | null {
     return null;
   }
   return {me, project};
+}
+
+export function guardLikeRequest(ctx: GuardContext): BlogRequest | null {
+  if (ctx.currentUser.login === GUEST_LOGIN) {
+    ctx.response.code = 403;
+    ctx.response.json({items: [], me: ctx.currentUser.login, error: 'Sign in to like posts.'});
+    return null;
+  }
+  return guardBlogRequest(ctx);
 }

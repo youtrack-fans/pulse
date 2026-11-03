@@ -1,4 +1,4 @@
-import {guardBlogRequest} from '../../../guard';
+import {guardLikeRequest} from '../../../guard';
 import {findBlogPost, likeItems, readLikes, writeLikes} from '../../../likes';
 import {isValidReaction} from '../../../reactions';
 
@@ -24,7 +24,7 @@ export type LikeRes = {
 };
 
 export default function handle(ctx: CtxPost<LikeReq, LikeRes>): void {
-  const guard = guardBlogRequest(ctx);
+  const guard = guardLikeRequest(ctx);
   if (!guard) {
     return;
   }

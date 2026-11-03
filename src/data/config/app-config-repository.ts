@@ -11,7 +11,7 @@ export class AppConfigRepository implements ConfigRepository {
   }
 
   async getConfig(): Promise<BlogConfig | null> {
-    const response = await fetchSettings(this.host);
+    const [response, contextPath] = await Promise.all([fetchSettings(this.host), this.fetchContextPath()]);
 
     if (response.error) {
       throw new Error(response.error);
@@ -25,6 +25,16 @@ export class AppConfigRepository implements ConfigRepository {
       projectName: response.project.name,
       projectShortName: response.project.shortName,
       blogName: response.blogName,
+      contextPath,
     };
+  }
+
+  private async fetchContextPath(): Promise<string> {
+    try {
+      const config = await this.host.fetchYouTrack<{contextPath?: string}>('config?fields=contextPath');
+      return config.contextPath ?? '';
+    } catch {
+      return '';
+    }
   }
 }

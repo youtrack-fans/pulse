@@ -53,7 +53,7 @@ export const PostPage: React.FunctionComponent<PostPageProps> = ({postId, replyT
   const ownHeart = currentUser ? hearts.find(r => r.authorLogin === currentUser.login) : undefined;
   const commentsRef = useRef<HTMLDivElement | null>(null);
   const scrolledToComments = useRef(false);
-  const renderedContent = renderPostContent(post?.content ?? '');
+  const renderedContent = renderPostContent(post?.content ?? '', config.contextPath);
 
   useEffect(() => {
     if (scrollToComments && post && !commentsLoading && !showSkeleton && !scrolledToComments.current && commentsRef.current) {

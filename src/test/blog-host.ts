@@ -18,7 +18,7 @@ export function nextProject(): string {
 }
 
 export function createConfig(projectShortName: string = nextProject()): BlogConfig {
-  return {projectName: 'Pulse', projectShortName, blogName: 'Pulse'};
+  return {projectName: 'Pulse', projectShortName, blogName: 'Pulse', contextPath: ''};
 }
 
 export function createBlogHost(fixture: BlogFixture): FakeHost {

@@ -2,6 +2,7 @@ export interface BlogConfig {
   projectName: string;
   projectShortName: string;
   blogName?: string;
+  contextPath: string;
 }
 
 export interface Blog {

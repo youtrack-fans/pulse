@@ -56,6 +56,17 @@ function createHeadingId(title: string, usedIds: Set<string>): string {
 }
 
 let sanitizerReady = false;
+let linkContextPath = '';
+
+function underContextPath(href: string): string {
+  if (!href.startsWith('/') || href.startsWith('//') || !linkContextPath) {
+    return href;
+  }
+  if (href === linkContextPath || href.startsWith(`${linkContextPath}/`)) {
+    return href;
+  }
+  return `${linkContextPath}${href}`;
+}
 
 function setupSanitizer(): void {
   if (sanitizerReady) {
@@ -89,14 +100,16 @@ function setupSanitizer(): void {
       node.removeAttribute('target');
       node.removeAttribute('rel');
     } else {
+      node.setAttribute('href', underContextPath(href));
       node.setAttribute('target', '_blank');
       node.setAttribute('rel', 'noopener noreferrer');
     }
   });
 }
 
-export function renderPostContent(content: string): RenderedPostContent {
+export function renderPostContent(content: string, contextPath: string): RenderedPostContent {
   setupSanitizer();
+  linkContextPath = contextPath;
   const markdown = splitBoldAcrossParagraphs(normalizeMarkdown(stripLeadingTitle(content)));
   const usedIds = new Set<string>();
 

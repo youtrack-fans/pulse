@@ -31,6 +31,7 @@ export function buildHeaderState(
   blogs: readonly Blog[],
   stubs: readonly MagazinePostStub[],
   navigation: HeaderNavigation,
+  contextPath: string,
 ): HeaderState {
   if (blogs.length === 0) {
     return {};
@@ -47,6 +48,6 @@ export function buildHeaderState(
     nav,
     moreNav: categories,
     allCategories,
-    writeHref: target ? `/articles/n?parentArticleId=${target.idReadable}` : undefined,
+    writeHref: target ? `${contextPath}/articles/n?parentArticleId=${target.idReadable}` : undefined,
   };
 }

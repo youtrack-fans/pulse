@@ -39,7 +39,7 @@ interface SearchPaletteProviderProps {
 export const SearchPaletteProvider: React.FunctionComponent<SearchPaletteProviderProps> = ({config, route, children}) => {
   const {goToPost, goToAuthor, goToBlogList, goToFeed} = useNavigation();
   const {blogs, stubs} = useBlogs(config);
-  const categories = buildHeaderState(route, blogs, stubs, {goToBlogList, goToFeed}).allCategories ?? [];
+  const categories = buildHeaderState(route, blogs, stubs, {goToBlogList, goToFeed}, config.contextPath).allCategories ?? [];
   const [openScope, setOpenScope] = useState<Scope | null>(null);
 
   const isOpen = openScope !== null;
