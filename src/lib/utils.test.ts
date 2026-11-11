@@ -1,6 +1,6 @@
 import {describe, expect, it} from 'vitest';
 
-import {stripMarkdown} from './utils';
+import {getSnippet, stripMarkdown} from './utils';
 
 describe('stripMarkdown', () => {
   it('removes fenced code blocks entirely', () => {
@@ -38,5 +38,24 @@ describe('stripMarkdown', () => {
 
   it('keeps a sentence that only contains a pipe', () => {
     expect(stripMarkdown('Use a | b to separate options.')).toBe('Use a | b to separate options.');
+  });
+});
+
+describe('getSnippet', () => {
+  it('leaves out headings, so the title and section names do not run into the text', () => {
+    expect(getSnippet('# Title\n\nIntro text.\n\n## Section\n\nMore text.')).toBe('Intro text.\nMore text.');
+  });
+
+  it('falls back to the headings when the content has nothing else', () => {
+    expect(getSnippet('# Only a title')).toBe('Only a title');
+  });
+
+  it('does not stack the ellipsis on a full stop', () => {
+    const text = `${'word '.repeat(10).trim()}. ${'next '.repeat(10).trim()}`;
+    expect(getSnippet(text, 52)).toBe(`${'word '.repeat(10).trim()}...`);
+  });
+
+  it('returns short text unchanged', () => {
+    expect(getSnippet('Short.')).toBe('Short.');
   });
 });

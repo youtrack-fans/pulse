@@ -1,5 +1,23 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: calc(var(--ring-unit) * 1.5);
+  padding-bottom: calc(var(--ring-unit) * 3);
+}
+
 .description {
   display: block;
   color: var(--pulse-text-secondary);
   max-width: 480px;
+}
+
+.link {
+  color: var(--pulse-accent-strong);
+  font-size: var(--pulse-font-m);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--pulse-accent-hover);
 }

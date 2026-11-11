@@ -7,7 +7,7 @@ import {toggleStarOptimistic} from '../../data/articles/toggle-star';
 import {patchCachedPost, peekPost} from '../../data/articles/post-cache';
 import {AppPostReactionsRepository} from '../../data/post-reactions/app-post-reactions-repository';
 import {togglePostReaction as toggleReactionOnPost} from '../../data/post-reactions/toggle-post-reaction';
-import {guarded} from '../../lib/guarded';
+import {guarded, isNotFound} from '../../lib/guarded';
 
 interface UsePostResult {
   post: BlogPost | null;
@@ -17,6 +17,7 @@ interface UsePostResult {
   loading: boolean;
   commentsLoading: boolean;
   error: string | null;
+  notFound: boolean;
   commentsError: string | null;
   retry: () => void;
   addComment: (text: string) => Promise<boolean>;
@@ -34,6 +35,7 @@ export function usePost(postId: string, config: BlogConfig): UsePostResult {
   const [loading, setLoading] = useState(() => peekPost(postId) === null);
   const [commentsLoading, setCommentsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [notFound, setNotFound] = useState(false);
   const [commentsError, setCommentsError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
 
@@ -46,6 +48,7 @@ export function usePost(postId: string, config: BlogConfig): UsePostResult {
     setLoading(cachedPost === null);
     setCommentsLoading(true);
     setError(null);
+    setNotFound(false);
     setCommentsError(null);
     const cachedReactions = reactionsRepo.getCachedReactions();
     setPostReactions(cachedReactions?.[postId] ?? []);
@@ -58,11 +61,12 @@ export function usePost(postId: string, config: BlogConfig): UsePostResult {
         setComments(loadedComments);
         setLoading(false);
         setCommentsLoading(false);
-      } catch {
+      } catch (caught) {
         if (cancelled) {return;}
         if (cachedPost) {
           setCommentsError('The comments could not be loaded.');
         } else {
+          setNotFound(isNotFound(caught));
           setError('This post could not be loaded.');
         }
         setLoading(false);
@@ -144,6 +148,7 @@ export function usePost(postId: string, config: BlogConfig): UsePostResult {
     loading,
     commentsLoading,
     error,
+    notFound,
     commentsError,
     retry: () => setAttempt(count => count + 1),
     addComment,

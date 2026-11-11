@@ -32,6 +32,7 @@
   color: inherit;
   text-align: inherit;
   cursor: pointer;
+  overflow-wrap: anywhere;
 }
 
 .titleButton::after {
@@ -119,6 +120,7 @@
   font-size: var(--pulse-font-m);
   color: var(--pulse-text-body);
   line-height: var(--pulse-line-height-relaxed);
+  overflow-wrap: anywhere;
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;

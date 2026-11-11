@@ -19,12 +19,15 @@ export function stripMarkdown(text: string): string {
     .trim();
 }
 
+const HEADING_LINE = /^[ \t]*#{1,6}[ \t]+.*$/gm;
+
 export function getSnippet(content: string, maxLength: number = 200): string {
-  const stripped = stripMarkdown(content);
+  const stripped = stripMarkdown(content.replace(HEADING_LINE, '')) || stripMarkdown(content);
   if (stripped.length <= maxLength) {
     return stripped;
   }
-  return stripped.slice(0, maxLength).replace(/\s+\S*$/, '') + '...';
+  const cut = stripped.slice(0, maxLength).replace(/\s+\S*$/, '').replace(/[\s.,;:!?]+$/, '');
+  return `${cut}...`;
 }
 
 export function getReadingTimeMinutes(content: string): number {

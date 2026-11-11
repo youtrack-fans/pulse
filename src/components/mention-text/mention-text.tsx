@@ -1,12 +1,13 @@
 import React from 'react';
 
+import {MENTION_SOURCE} from './mention-pattern';
 import styles from './mention-text.module.css';
 
 interface MentionTextProps {
   text: string;
 }
 
-const MENTION_PATTERN = /@\p{Lu}[\p{L}\p{N}_-]*(?: \p{Lu}[\p{L}\p{N}_-]*)?/gu;
+const MENTION_PATTERN = new RegExp(MENTION_SOURCE, 'gu');
 
 export const MentionText: React.FunctionComponent<MentionTextProps> = ({text}) => {
   const parts: React.ReactNode[] = [];

@@ -29,6 +29,10 @@ export class AppConfigRepository implements ConfigRepository {
     };
   }
 
+  async getContextPath(): Promise<string> {
+    return this.fetchContextPath();
+  }
+
   private async fetchContextPath(): Promise<string> {
     try {
       const config = await this.host.fetchYouTrack<{contextPath?: string}>('config?fields=contextPath');

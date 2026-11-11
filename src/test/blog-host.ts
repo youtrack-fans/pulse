@@ -47,7 +47,7 @@ export function createBlogHost(fixture: BlogFixture): FakeHost {
       }
       const found = everything.find(candidate => candidate.id === articleMatch[1] || candidate.idReadable === articleMatch[1]);
       if (!found) {
-        throw new Error('article not found');
+        throw Object.assign(new Error('article not found'), {status: 404});
       }
       return params.get('fields') === 'idReadable' ? {idReadable: found.idReadable} : toApiArticle(found);
     }

@@ -2,6 +2,7 @@
   font-size: var(--pulse-font-l);
   line-height: var(--pulse-line-height-relaxed);
   color: var(--pulse-text-default);
+  overflow-wrap: anywhere;
 }
 
 .content > :last-child {

@@ -176,6 +176,83 @@
   line-height: var(--pulse-line-height-relaxed);
   margin-top: calc(var(--ring-unit) * 0.5);
   color: var(--pulse-text-body);
+  overflow-wrap: anywhere;
+}
+
+.text > :first-child {
+  margin-top: 0;
+}
+
+.text > :last-child {
+  margin-bottom: 0;
+}
+
+.text p,
+.text ul,
+.text ol,
+.text blockquote,
+.text pre {
+  margin: 0 0 calc(var(--ring-unit) * 1.25);
+}
+
+.text h1,
+.text h2,
+.text h3,
+.text h4,
+.text h5,
+.text h6 {
+  margin: calc(var(--ring-unit) * 1.5) 0 calc(var(--ring-unit) * 0.5);
+  font-size: var(--pulse-font-m);
+  font-weight: 700;
+  line-height: var(--pulse-line-height-snug);
+}
+
+.text a {
+  color: var(--pulse-accent-strong);
+  text-decoration: none;
+}
+
+.text a:hover {
+  color: var(--pulse-accent-hover);
+}
+
+.text code {
+  padding: calc(var(--ring-unit) * 0.125) calc(var(--ring-unit) * 0.5);
+  border: 1px solid var(--pulse-line);
+  border-radius: var(--pulse-radius-xs);
+  background: var(--pulse-bg-sidebar);
+  font-family: var(--ring-font-family-monospace);
+  font-size: 0.875em;
+}
+
+.text pre {
+  padding: calc(var(--ring-unit) * 1.5);
+  border: 1px solid var(--pulse-line);
+  border-radius: var(--pulse-radius-m);
+  background: var(--pulse-bg-sidebar);
+  overflow-x: auto;
+}
+
+.text pre code {
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+.text blockquote {
+  padding: calc(var(--ring-unit) * 0.5) calc(var(--ring-unit) * 1.5);
+  border-left: 3px solid var(--pulse-accent);
+  color: var(--pulse-text-secondary);
+}
+
+.text ul,
+.text ol {
+  padding-left: calc(var(--ring-unit) * 3);
+}
+
+.text img {
+  max-width: 100%;
+  height: auto;
 }
 
 .meta {

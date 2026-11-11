@@ -1,10 +1,10 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect, useRef, useMemo} from 'react';
 
 import type {ArticleComment, CommentReaction, Author} from '../../data/types';
 import {formatShortDate} from '../../lib/date';
 import {Avatar} from '../avatar/avatar';
 import {HeartGlyph} from '../../icons/icons';
-import {MentionText} from '../mention-text/mention-text';
+import {renderCommentContent} from '../post-content/render-post-content';
 import {LIKE_REACTION} from '../../config/constants';
 import {useFocusComment} from './use-focus-comment';
 import {shouldApplyTarget} from './comment-target';
@@ -18,6 +18,7 @@ interface CommentSectionProps {
   focusCommentId?: string;
   loading: boolean;
   postAuthorLogin: string;
+  contextPath: string;
   currentUser?: Author | null;
   onAddComment: (text: string) => Promise<boolean>;
   onAddReply: (parentCommentId: string, text: string) => Promise<boolean>;
@@ -28,6 +29,16 @@ interface CommentThread {
   root: ArticleComment;
   replies: readonly ArticleComment[];
 }
+
+interface CommentTextProps {
+  text: string;
+  contextPath: string;
+}
+
+const CommentText: React.FunctionComponent<CommentTextProps> = ({text, contextPath}) => {
+  const html = useMemo(() => renderCommentContent(text, contextPath), [text, contextPath]);
+  return <div className={styles.text} dangerouslySetInnerHTML={{__html: html}}/>;
+};
 
 const SEND_SHORTCUT = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘ Enter' : 'Ctrl+Enter';
 
@@ -186,6 +197,7 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
   focusCommentId,
   loading,
   postAuthorLogin,
+  contextPath,
   currentUser,
   onAddComment,
   onAddReply,
@@ -321,7 +333,7 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
             )}
             <span className={styles.time}>· {formatShortDate(comment.created)}</span>
           </div>
-          <div className={styles.text}><MentionText text={comment.text}/></div>
+          <CommentText text={comment.text} contextPath={contextPath}/>
           <div className={styles.meta}>
             <LikeButton commentId={comment.id} group={likeGroup} onToggleReaction={onToggleReaction}/>
             <ReplyButton threadRootId={threadRootId} onReply={openReply}/>
@@ -338,7 +350,7 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
     <section className={styles.section}>
       <div className={styles.head}>
         <h2 className={styles.heading}>
-          {comments.length > 0 ? `${comments.length} comments` : 'Comments'}
+          {comments.length > 0 ? `${comments.length} ${comments.length === 1 ? 'comment' : 'comments'}` : 'Comments'}
         </h2>
         <span className={styles.sort}>
           <select

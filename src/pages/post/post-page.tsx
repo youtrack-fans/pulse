@@ -30,7 +30,7 @@ interface PostPageProps {
 }
 
 export const PostPage: React.FunctionComponent<PostPageProps> = ({postId, replyToCommentId, focusCommentId, scrollToComments, config}) => {
-  const {goToAuthor} = useNavigation();
+  const {goToAuthor, goToBlogList} = useNavigation();
   const {
     post,
     comments,
@@ -39,6 +39,7 @@ export const PostPage: React.FunctionComponent<PostPageProps> = ({postId, replyT
     loading,
     commentsLoading,
     error,
+    notFound,
     commentsError,
     retry,
     addComment,
@@ -68,6 +69,14 @@ export const PostPage: React.FunctionComponent<PostPageProps> = ({postId, replyT
     }
   };
   const handleLike = () => togglePostReaction(LIKE_REACTION, ownHeart?.id ?? null);
+
+  if (notFound) {
+    return (
+      <ErrorState title="Post not found" message="This post does not exist or was deleted.">
+        <Button primary onClick={() => goToBlogList()}>Back to the blog</Button>
+      </ErrorState>
+    );
+  }
 
   if (error) {
     return <ErrorState message={error} onRetry={retry}/>;
@@ -154,6 +163,7 @@ export const PostPage: React.FunctionComponent<PostPageProps> = ({postId, replyT
               focusCommentId={focusCommentId}
               loading={commentsLoading}
               postAuthorLogin={post.author.login}
+              contextPath={config.contextPath}
               currentUser={currentUser}
               onAddComment={addComment}
               onAddReply={addReply}

@@ -1,9 +1,14 @@
 import alertService from '@jetbrains/ring-ui-built/components/alert-service/alert-service';
 
 const FORBIDDEN_STATUS = 403;
+const NOT_FOUND_STATUS = 404;
 
 function hasStatus(error: unknown): error is {status: number} {
   return typeof error === 'object' && error !== null && 'status' in error && typeof error.status === 'number';
+}
+
+export function isNotFound(error: unknown): boolean {
+  return hasStatus(error) && error.status === NOT_FOUND_STATUS;
 }
 
 function hint(error: unknown): string {

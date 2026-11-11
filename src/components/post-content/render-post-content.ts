@@ -3,7 +3,9 @@ import {Marked} from 'marked';
 
 import {hasLoadedBefore, readImageSize} from '../../lib/image-loading';
 import {normalizeMarkdown} from './normalize-markdown';
+import {MENTION_SOURCE} from '../mention-text/mention-pattern';
 
+import mentionStyles from '../mention-text/mention-text.module.css';
 import smoothImageStyles from '../smooth-image/smooth-image.module.css';
 import styles from './post-content.module.css';
 
@@ -127,4 +129,59 @@ export function renderPostContent(content: string, contextPath: string): Rendere
 
   const html = DOMPurify.sanitize(marked.parse(markdown, {async: false}), {ADD_ATTR: ['target']});
   return {html};
+}
+
+const MENTION_EXCLUDED_PARENTS = new Set(['CODE', 'PRE', 'A']);
+
+function highlightMentions(fragment: DocumentFragment): void {
+  const doc = fragment.ownerDocument;
+  const walker = doc.createTreeWalker(fragment, NodeFilter.SHOW_TEXT);
+  const textNodes: Text[] = [];
+  let current = walker.nextNode();
+  while (current) {
+    textNodes.push(current as Text);
+    current = walker.nextNode();
+  }
+  textNodes.forEach(node => {
+    if (node.parentElement && MENTION_EXCLUDED_PARENTS.has(node.parentElement.tagName)) {
+      return;
+    }
+    const text = node.data;
+    const pattern = new RegExp(MENTION_SOURCE, 'gu');
+    const parts: Node[] = [];
+    let lastIndex = 0;
+    let match = pattern.exec(text);
+    while (match) {
+      if (match.index > lastIndex) {
+        parts.push(doc.createTextNode(text.slice(lastIndex, match.index)));
+      }
+      const mention = doc.createElement('span');
+      mention.className = mentionStyles.mention;
+      mention.textContent = match[0];
+      parts.push(mention);
+      lastIndex = match.index + match[0].length;
+      match = pattern.exec(text);
+    }
+    if (parts.length === 0) {
+      return;
+    }
+    if (lastIndex < text.length) {
+      parts.push(doc.createTextNode(text.slice(lastIndex)));
+    }
+    node.replaceWith(...parts);
+  });
+}
+
+export function renderCommentContent(content: string, contextPath: string): string {
+  setupSanitizer();
+  linkContextPath = contextPath;
+  const marked = new Marked({gfm: true, breaks: true});
+  const fragment = DOMPurify.sanitize(marked.parse(content, {async: false}), {
+    ADD_ATTR: ['target'],
+    RETURN_DOM_FRAGMENT: true,
+  });
+  highlightMentions(fragment);
+  const container = fragment.ownerDocument.createElement('div');
+  container.append(fragment);
+  return container.innerHTML;
 }

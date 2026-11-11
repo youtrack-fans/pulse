@@ -64,6 +64,7 @@
   line-height: var(--pulse-line-height-tight);
   color: var(--pulse-text-default);
   letter-spacing: -0.7px;
+  overflow-wrap: anywhere;
   scroll-margin-top: calc(var(--pulse-header-offset) + var(--ring-unit) * 4);
 }
 

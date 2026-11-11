@@ -68,6 +68,14 @@ describe('PostPage', () => {
     expect(screen.getByRole('button', {name: 'Retry'})).toBeTruthy();
   });
 
+  it('says the post was not found, without a retry, when it does not exist', async () => {
+    const host = createBlogHost({blogs: [general], posts: []}).host;
+    renderWithApp(<PostPage postId="missing" config={createConfig()}/>, host);
+    expect(await screen.findByText('Post not found')).toBeTruthy();
+    expect(screen.queryByRole('button', {name: 'Retry'})).toBeNull();
+    expect(screen.getByRole('button', {name: 'Back to the blog'})).toBeTruthy();
+  });
+
   it('toggles the bookmark of the article', async () => {
     rememberPosts([cachedPost]);
     const host = createBlogHost({blogs: [general], posts: [article]}).host;

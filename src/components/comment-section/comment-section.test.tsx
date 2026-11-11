@@ -21,13 +21,14 @@ const comments = [
   comment('c3', 'Newest comment', 3000),
 ];
 
-function renderSection() {
+function renderSection(list: readonly ArticleComment[] = comments) {
   return render(
     <CommentSection
-      comments={comments}
+      comments={list}
       replyMap={{}}
       loading={false}
       postAuthorLogin="ann"
+      contextPath=""
       currentUser={null}
       onAddComment={vi.fn()}
       onAddReply={vi.fn()}
@@ -57,5 +58,25 @@ describe('CommentSection sort', () => {
     renderSection();
     fireEvent.change(screen.getByRole('combobox', {name: 'Sort comments'}), {target: {value: 'oldest'}});
     expect(shownTexts()).toEqual(['Oldest comment', 'Middle comment', 'Newest comment']);
+  });
+});
+
+describe('CommentSection content', () => {
+  it('renders Markdown in a comment', () => {
+    renderSection([comment('c1', 'A **bold** move', 1000)]);
+
+    expect(screen.getByText('bold').tagName).toBe('STRONG');
+  });
+
+  it('uses the singular in the heading for one comment', () => {
+    renderSection([comment('c1', 'Only one', 1000)]);
+
+    expect(screen.getByRole('heading', {name: '1 comment'})).toBeTruthy();
+  });
+
+  it('uses the plural in the heading for several comments', () => {
+    renderSection();
+
+    expect(screen.getByRole('heading', {name: '3 comments'})).toBeTruthy();
   });
 });
