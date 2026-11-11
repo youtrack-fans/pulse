@@ -8,6 +8,7 @@ import type {HostAPI} from './api/host';
 import {HostProvider} from './api/host-context';
 import App from './app';
 import {clearPostCache} from './data/articles/post-cache';
+import type {BlogConfig} from './data/types';
 import {loadPostPage} from './pages/post/lazy-post-page';
 import {routeToLocation} from './routing/routing';
 import {createBlogHost, createConfig} from './test/blog-host';
@@ -23,11 +24,11 @@ const article = post('p1', general, 10, {
 
 const otherArticle = post('p2', general, 20, {summary: 'Other article', reporterLogin: 'bob'});
 
-function renderApp(initialLocation: ReturnType<typeof routeToLocation> | null) {
+function renderApp(initialLocation: ReturnType<typeof routeToLocation> | null, overrides: Partial<BlogConfig> = {}) {
   const host = createBlogHost({blogs: [general], posts: [article, otherArticle]}).host;
   return render(
     <HostProvider value={host}>
-      <App config={createConfig()} initialLocation={initialLocation}/>
+      <App config={createConfig(undefined, overrides)} initialLocation={initialLocation}/>
     </HostProvider>,
   );
 }
@@ -135,5 +136,32 @@ describe('App', () => {
     await vi.waitFor(() => expect(scroll).toHaveBeenCalled());
     expect((scroll.mock.contexts[0] as HTMLElement).textContent).toContain('First comment');
     scroll.mockRestore();
+  });
+});
+
+describe('App access', () => {
+  beforeEach(clearPostCache);
+
+  it('shows the no-access screen instead of the setup screen to a user without access to the blog project', () => {
+    const host = createBlogHost({blogs: [], posts: []}).host;
+    render(
+      <HostProvider value={host}>
+        <App config={null} accessDenied initialLocation={null}/>
+      </HostProvider>,
+    );
+    expect(screen.getByText('No Access to the Blog')).toBeTruthy();
+    expect(screen.queryByText('Blog Setup Required')).toBeNull();
+  });
+
+  it('offers Write a post to a user who can create articles', async () => {
+    renderApp(null);
+    await screen.findByRole('button', {name: 'Readable article'});
+    expect(screen.getByLabelText('Write a post')).toBeTruthy();
+  });
+
+  it('hides Write a post from a user who cannot create articles', async () => {
+    renderApp(null, {canWrite: false});
+    await screen.findByRole('button', {name: 'Readable article'});
+    expect(screen.queryByLabelText('Write a post')).toBeNull();
   });
 });

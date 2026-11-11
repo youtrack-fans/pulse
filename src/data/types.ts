@@ -3,6 +3,8 @@ export interface BlogConfig {
   projectShortName: string;
   blogName?: string;
   contextPath: string;
+  canWrite: boolean;
+  canComment: boolean;
 }
 
 export interface Blog {

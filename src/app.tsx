@@ -10,6 +10,7 @@ import type {AppLocation} from './api/host';
 import type {Route} from './routing/routing';
 import {routeToLocation, locationToRoute, routeIdentity, serializeLocation, slugify} from './routing/routing';
 import {SetupRequired} from './components/setup-required/setup-required';
+import {NoAccess} from './components/no-access/no-access';
 import {AppHeader} from './components/app-header/app-header';
 import {Page} from './components/page/page';
 import {ErrorBoundary} from './components/error-state/error-boundary';
@@ -21,6 +22,7 @@ import {LazyPostPage} from './pages/post/lazy-post-page';
 
 interface AppProps {
   config: BlogConfig | null;
+  accessDenied?: boolean;
   initialLocation: AppLocation | null;
 }
 
@@ -43,7 +45,7 @@ function nextView(previous: AppView, next: Route): AppView {
   return next.name === 'post' ? {list: previous.list, post: next} : {list: next, post: null};
 }
 
-const App: React.FunctionComponent<AppProps> = ({config, initialLocation}) => {
+const App: React.FunctionComponent<AppProps> = ({config, accessDenied, initialLocation}) => {
   const host = useHost();
   const [view, setView] = useState<AppView>(() => toView(initialLocation ? locationToRoute(initialLocation) : {name: 'blog-list'}));
   const route = view.post ?? view.list ?? {name: 'blog-list'};
@@ -114,6 +116,10 @@ const App: React.FunctionComponent<AppProps> = ({config, initialLocation}) => {
   };
 
   const navigationState = {goToFeed, goToPost, goToComments, goToBlogList, goToAuthor};
+
+  if (accessDenied) {
+    return <NoAccess/>;
+  }
 
   if (!config) {
     return <SetupRequired/>;

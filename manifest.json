@@ -3,10 +3,10 @@
   "title": "Pulse",
   "description": "Blog platform for YouTrack",
   "$schema": "https://json.schemastore.org/youtrack-app.json",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "url": "https://youtrack.fans/pulse",
   "minYouTrackVersion": "2026.2.0",
-  "changeNotes": "Initial release.",
+  "changeNotes": "Like, unlike and reactions now respect article visibility. The blog settings are hidden from users who cannot read the blog project, who now see a dedicated screen instead of an error. Write a post, the comment box and Reply are shown only to users with the matching permission. Removed a stylesheet link that produced a 404 on every load.",
   "vendor": {
     "name": "YouTrack Fans",
     "url": "https://youtrack.fans/pulse",

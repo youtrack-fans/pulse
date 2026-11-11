@@ -17,8 +17,8 @@ export function nextProject(): string {
   return `DOM${projectCounter}`;
 }
 
-export function createConfig(projectShortName: string = nextProject()): BlogConfig {
-  return {projectName: 'Pulse', projectShortName, blogName: 'Pulse', contextPath: ''};
+export function createConfig(projectShortName: string = nextProject(), overrides: Partial<BlogConfig> = {}): BlogConfig {
+  return {projectName: 'Pulse', projectShortName, blogName: 'Pulse', contextPath: '', canWrite: true, canComment: true, ...overrides};
 }
 
 export function createBlogHost(fixture: BlogFixture): FakeHost {

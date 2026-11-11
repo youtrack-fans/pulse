@@ -1,6 +1,5 @@
 import type {HostAPI} from '../../api/host';
-import type {BlogConfig} from '../types';
-import type {ConfigRepository} from './config-repository';
+import type {BlogAccess, ConfigRepository} from './config-repository';
 import {fetchSettings} from '../../api/index';
 
 export class AppConfigRepository implements ConfigRepository {
@@ -10,22 +9,31 @@ export class AppConfigRepository implements ConfigRepository {
     this.host = host;
   }
 
-  async getConfig(): Promise<BlogConfig | null> {
+  async getConfig(): Promise<BlogAccess> {
     const [response, contextPath] = await Promise.all([fetchSettings(this.host), this.fetchContextPath()]);
 
     if (response.error) {
       throw new Error(response.error);
     }
 
+    if (!response.configured) {
+      return {status: 'unconfigured'};
+    }
+
     if (!response.project) {
-      return null;
+      return {status: 'forbidden'};
     }
 
     return {
-      projectName: response.project.name,
-      projectShortName: response.project.shortName,
-      blogName: response.blogName,
-      contextPath,
+      status: 'ready',
+      config: {
+        projectName: response.project.name,
+        projectShortName: response.project.shortName,
+        blogName: response.blogName,
+        contextPath,
+        canWrite: response.permissions?.createArticle ?? false,
+        canComment: response.permissions?.createComment ?? false,
+      },
     };
   }
 

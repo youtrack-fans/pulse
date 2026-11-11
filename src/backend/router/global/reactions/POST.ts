@@ -1,5 +1,5 @@
 import {guardBlogRequest} from '../../../guard';
-import {findBlogPost, likeItems, readLikes} from '../../../likes';
+import {findBlogPosts, likeItems, readLikes} from '../../../likes';
 
 /**
  * @zod-to-schema
@@ -39,11 +39,8 @@ export default function handle(ctx: CtxPost<ReactionsReq, ReactionsRes>): void {
     return;
   }
   const items: ReactionsRes['items'] = [];
-  new Set<string>(postIds).forEach(postId => {
-    const article = findBlogPost(project, postId);
-    if (article) {
-      likeItems(postId, readLikes(article)).forEach(item => items.push(item));
-    }
+  findBlogPosts(project, [...new Set<string>(postIds)]).forEach((article, postId) => {
+    likeItems(postId, readLikes(article)).forEach(item => items.push(item));
   });
   ctx.response.json({items, me});
 }

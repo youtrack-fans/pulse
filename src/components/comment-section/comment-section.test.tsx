@@ -21,7 +21,7 @@ const comments = [
   comment('c3', 'Newest comment', 3000),
 ];
 
-function renderSection(list: readonly ArticleComment[] = comments) {
+function renderSection(list: readonly ArticleComment[] = comments, canComment = true) {
   return render(
     <CommentSection
       comments={list}
@@ -30,6 +30,7 @@ function renderSection(list: readonly ArticleComment[] = comments) {
       postAuthorLogin="ann"
       contextPath=""
       currentUser={null}
+      canComment={canComment}
       onAddComment={vi.fn()}
       onAddReply={vi.fn()}
       onToggleReaction={vi.fn()}
@@ -78,5 +79,25 @@ describe('CommentSection content', () => {
     renderSection();
 
     expect(screen.getByRole('heading', {name: '3 comments'})).toBeTruthy();
+  });
+});
+
+describe('CommentSection without the comment permission', () => {
+  it('hides the comment box and the reply buttons', () => {
+    renderSection(comments, false);
+    expect(screen.queryByLabelText('Add a comment')).toBeNull();
+    expect(screen.queryByRole('button', {name: 'Reply'})).toBeNull();
+    expect(screen.getAllByRole('button', {name: 'Like'})).toHaveLength(3);
+  });
+
+  it('does not invite to comment when there are no comments', () => {
+    renderSection([], false);
+    expect(screen.getByText('No comments yet.')).toBeTruthy();
+  });
+
+  it('still offers the comment box and replies to a user who can comment', () => {
+    renderSection(comments, true);
+    expect(screen.getByLabelText('Add a comment')).toBeTruthy();
+    expect(screen.getAllByRole('button', {name: 'Reply'})).toHaveLength(3);
   });
 });

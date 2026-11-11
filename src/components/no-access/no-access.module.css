@@ -1,0 +1,6 @@
+.description {
+  display: block;
+  color: var(--pulse-text-secondary);
+  max-width: 480px;
+  padding-bottom: calc(var(--ring-unit) * 3);
+}

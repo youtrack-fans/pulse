@@ -165,6 +165,7 @@ export const PostPage: React.FunctionComponent<PostPageProps> = ({postId, replyT
               postAuthorLogin={post.author.login}
               contextPath={config.contextPath}
               currentUser={currentUser}
+              canComment={config.canComment}
               onAddComment={addComment}
               onAddReply={addReply}
               onToggleReaction={toggleReaction}

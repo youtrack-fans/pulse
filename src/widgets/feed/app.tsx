@@ -6,7 +6,7 @@ import {HostProvider} from '../../api/host-context';
 import {registerHost} from '../../api/index';
 import {appLocationBus} from '../../api/app-location-bus';
 import type {AppLocation, HostAPI} from '../../api/host';
-import type {BlogConfig} from '../../data/types';
+import type {BlogAccess} from '../../data/config/config-repository';
 import {ErrorState} from '../../components/error-state/error-state';
 import {Page} from '../../components/page/page';
 import {BlogNameContext} from '../../components/pulse-header/blog-name-context';
@@ -14,7 +14,7 @@ import {locationToRoute} from '../../routing/routing';
 import {loadPostPage} from '../../pages/post/lazy-post-page';
 
 export const App: React.FunctionComponent = () => {
-  const [bootstrap, setBootstrap] = useState<{host: HostAPI; config: BlogConfig | null; location: AppLocation | null} | null>(null);
+  const [bootstrap, setBootstrap] = useState<{host: HostAPI; access: BlogAccess; location: AppLocation | null} | null>(null);
   const [failed, setFailed] = useState(false);
 
   useEffect(() => {
@@ -33,9 +33,9 @@ export const App: React.FunctionComponent = () => {
           loadPostPage().catch(() => undefined);
         }
       });
-      const [config, location] = await Promise.all([new AppConfigRepository(host).getConfig(), locationRequest]);
+      const [access, location] = await Promise.all([new AppConfigRepository(host).getConfig(), locationRequest]);
       if (cancelled) {return;}
-      setBootstrap({host, config, location: changedLocation ?? location});
+      setBootstrap({host, access, location: changedLocation ?? location});
     };
     register().catch(() => {
       if (!cancelled) {setFailed(true);}
@@ -57,10 +57,12 @@ export const App: React.FunctionComponent = () => {
     return null;
   }
 
+  const config = bootstrap.access.status === 'ready' ? bootstrap.access.config : null;
+
   return (
     <HostProvider value={bootstrap.host}>
-      <BlogNameContext.Provider value={bootstrap.config?.blogName || 'Pulse'}>
-        <AppRoot config={bootstrap.config} initialLocation={bootstrap.location}/>
+      <BlogNameContext.Provider value={config?.blogName || 'Pulse'}>
+        <AppRoot config={config} accessDenied={bootstrap.access.status === 'forbidden'} initialLocation={bootstrap.location}/>
       </BlogNameContext.Provider>
     </HostProvider>
   );

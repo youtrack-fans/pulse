@@ -33,5 +33,5 @@ export const AppHeader: React.FunctionComponent<AppHeaderProps> = ({route, confi
   const header = buildHeaderState(route, blogs, stubs, {goToBlogList, goToFeed}, config.contextPath);
   const goHome = () => goToBlogList();
 
-  return <PulseHeader {...header} navLoading={loading} navError={error} onNavRetry={retry} onBrandClick={goHome}/>;
+  return <PulseHeader {...header} canWrite={config.canWrite} navLoading={loading} navError={error} onNavRetry={retry} onBrandClick={goHome}/>;
 };

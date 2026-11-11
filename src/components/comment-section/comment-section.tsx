@@ -20,6 +20,7 @@ interface CommentSectionProps {
   postAuthorLogin: string;
   contextPath: string;
   currentUser?: Author | null;
+  canComment: boolean;
   onAddComment: (text: string) => Promise<boolean>;
   onAddReply: (parentCommentId: string, text: string) => Promise<boolean>;
   onToggleReaction: (commentId: string, reaction: string, ownReactionId: string | null) => Promise<void>;
@@ -199,6 +200,7 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
   postAuthorLogin,
   contextPath,
   currentUser,
+  canComment,
   onAddComment,
   onAddReply,
   onToggleReaction,
@@ -336,7 +338,7 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
           <CommentText text={comment.text} contextPath={contextPath}/>
           <div className={styles.meta}>
             <LikeButton commentId={comment.id} group={likeGroup} onToggleReaction={onToggleReaction}/>
-            <ReplyButton threadRootId={threadRootId} onReply={openReply}/>
+            {canComment && <ReplyButton threadRootId={threadRootId} onReply={openReply}/>}
           </div>
         </div>
       </div>
@@ -366,24 +368,26 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
         </span>
       </div>
 
-      <div className={styles.composer}>
-        {currentUser && (
-          <Avatar name={currentUser.fullName} avatarUrl={currentUser.avatarUrl} size={36}/>
-        )}
-        <textarea
-          className={styles.textarea}
-          aria-label="Add a comment"
-          value={commentText}
-          onChange={handleCommentChange}
-          onKeyDown={handleKeyDown}
-          placeholder={`Add a comment · ${SEND_SHORTCUT} to send`}
-          rows={1}
-          disabled={submitting}
-        />
-      </div>
+      {canComment && (
+        <div className={styles.composer}>
+          {currentUser && (
+            <Avatar name={currentUser.fullName} avatarUrl={currentUser.avatarUrl} size={36}/>
+          )}
+          <textarea
+            className={styles.textarea}
+            aria-label="Add a comment"
+            value={commentText}
+            onChange={handleCommentChange}
+            onKeyDown={handleKeyDown}
+            placeholder={`Add a comment · ${SEND_SHORTCUT} to send`}
+            rows={1}
+            disabled={submitting}
+          />
+        </div>
+      )}
 
       {!loading && comments.length === 0 && (
-        <div className={styles.empty}>No comments yet. Be the first to comment!</div>
+        <div className={styles.empty}>{canComment ? 'No comments yet. Be the first to comment!' : 'No comments yet.'}</div>
       )}
 
       {visibleThreads.map(thread => {
@@ -407,7 +411,7 @@ export const CommentSection: React.FunctionComponent<CommentSectionProps> = ({
               )}
             </div>
           )}
-            {replyingTo === thread.root.id && (
+            {canComment && replyingTo === thread.root.id && (
             <div className={styles.replyComposer} ref={replyComposerRef}>
               {currentUser && (
                 <Avatar name={currentUser.fullName} avatarUrl={currentUser.avatarUrl} size={28}/>

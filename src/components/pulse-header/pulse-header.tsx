@@ -21,6 +21,7 @@ interface PulseHeaderProps {
   onNavRetry?: () => void;
   onBrandClick?: () => void;
   writeHref?: string;
+  canWrite?: boolean;
 }
 
 const HeaderNav: React.FunctionComponent<{nav: readonly PulseNavItem[]; moreCount?: number; onMore?: () => void}> = ({nav, moreCount, onMore}) => (
@@ -55,7 +56,7 @@ const HeaderNavSkeleton: React.FunctionComponent = () => (
   </nav>
 );
 
-const HeaderActions: React.FunctionComponent<{writeHref?: string; writePending?: boolean}> = ({writeHref, writePending}) => {
+const HeaderActions: React.FunctionComponent<{writeHref?: string; writePending?: boolean; canWrite: boolean}> = ({writeHref, writePending, canWrite}) => {
   const {open, isOpen, openBookmarks, isBookmarksOpen} = useSearchPalette();
   return (
     <div className={styles.actions}>
@@ -78,12 +79,12 @@ const HeaderActions: React.FunctionComponent<{writeHref?: string; writePending?:
       >
         <SearchGlyph/>
       </button>
-      {writeHref && (
+      {canWrite && writeHref && (
         <a className={styles.writeBtn} href={writeHref} target="_top" title="Write a post" aria-label="Write a post">
           <ComposeGlyph/>
         </a>
       )}
-      {!writeHref && writePending && (
+      {canWrite && !writeHref && writePending && (
         <span className={`${styles.writeBtn} ${styles.writeBtnPending}`} role="link" aria-disabled="true" aria-label="Write a post">
           <ComposeGlyph/>
         </span>
@@ -92,7 +93,7 @@ const HeaderActions: React.FunctionComponent<{writeHref?: string; writePending?:
   );
 };
 
-export const PulseHeader: React.FunctionComponent<PulseHeaderProps> = ({nav, moreNav, navLoading, navError, onNavRetry, onBrandClick, writeHref}) => {
+export const PulseHeader: React.FunctionComponent<PulseHeaderProps> = ({nav, moreNav, navLoading, navError, onNavRetry, onBrandClick, writeHref, canWrite = true}) => {
   const blogName = React.useContext(BlogNameContext);
   const {openCategories} = useSearchPalette();
   const showPlaceholders = useMinDuration(Boolean(navLoading), MIN_PLACEHOLDER_MS);
@@ -118,7 +119,7 @@ export const PulseHeader: React.FunctionComponent<PulseHeaderProps> = ({nav, mor
         </nav>
       )}
       {!showPlaceholders && nav && nav.length > 0 && <HeaderNav nav={nav} moreCount={moreNav ? moreNav.length - VISIBLE_CATEGORIES : undefined} onMore={moreNav ? openCategories : undefined}/>}
-      <HeaderActions writeHref={writeHref} writePending={showPlaceholders}/>
+      <HeaderActions writeHref={writeHref} writePending={showPlaceholders} canWrite={canWrite}/>
     </header>
   );
 };

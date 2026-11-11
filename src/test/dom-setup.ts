@@ -38,7 +38,7 @@ vi.mock('../api/index', () => ({
       reactions: {POST: async () => ({items: [], me: 'tester'})},
       like: {POST: async () => ({items: [], me: 'tester'})},
       unlike: {POST: async () => ({items: [], me: 'tester'})},
-      settings: {GET: async () => ({project: null})},
+      settings: {GET: async () => ({configured: false, project: null})},
     },
   }),
   registerHost: async () => {
